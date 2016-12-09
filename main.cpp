@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>;
 
 using namespace std;
 
@@ -6,10 +7,10 @@ using namespace std;
 bool is_word_possible(string word, string tiles) {
     bool has_tile, has_blanks;
 
-    for (char& c : word) {
+    for (char &c : word) {
         has_tile = has_blanks = false;
 
-        for (char& tile : tiles) {
+        for (char &tile : tiles) {
             cout << tile;
             if (tile == c) {
                 tile = NULL;
@@ -22,7 +23,7 @@ bool is_word_possible(string word, string tiles) {
 
         if (!has_tile) {
             if (has_blanks) {
-                for (char& tile : tiles) {
+                for (char &tile : tiles) {
                     if (tile == '?') {
                         tile = NULL;
                         has_tile = true;
@@ -42,6 +43,26 @@ bool is_word_possible(string word, string tiles) {
 
 
 int main() {
+    ifstream file;
+    string line, poss_words[175000];
+    int i = -1;
+
+    file.open("../words.txt");
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            i++;
+            poss_words[i] = line
+        }
+        file.close();
+    } else {
+        cerr << "Unable to open file.";
+        return 1;
+    }
+
+    return 0;
+
+
     string tiles, word;
 
     cout << "Enter exactly 7 letter tiles with no spaces" << endl;
